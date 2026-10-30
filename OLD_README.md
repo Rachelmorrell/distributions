@@ -12,18 +12,17 @@ Please file an issue if you are experiencing a problem or would like to discuss 
 
 Pull requests are encouraged if you have changes you believe would improve the setup process or increase compatibility across Linux distributions.
 
-
 Looking for the oldversion of [README.md](./OLD_README.md)
 
 ## Table of Contents
 
 * **[Debian and Ubuntu based distributions](#deb)** (deb)
-  - [Installation instructions](#debinstall)
-  - [Uninstall instructions](#debuninstall)
-  - [Manual installation](#debmanual)
+  * [Installation instructions](#debinstall)
+  * [Uninstall instructions](#debuninstall)
+  * [Manual installation](#debmanual)
 * **[Enterprise Linux based distributions](#rpm)** (rpm)
-  - [Installation instructions](#rpminstall)
-  - [Uninstall instructions](#rpmuninstall)
+  * [Installation instructions](#rpminstall)
+  * [Uninstall instructions](#rpmuninstall)
 * **[Tests](#tests)**
 * **[FAQ](#questions)**
 * **[Requested Distributions](#requests)**
@@ -164,14 +163,14 @@ NodeSource will maintain support for stable, testing and unstable releases of De
 
 ```sh
 curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - &&\
-sudo apt-get install -y nodejs
+sudo apt install -y nodejs
 ```
 
 ##### Using Debian, as root
 
 ```sh
 curl -fsSL https://deb.nodesource.com/setup_20.x | bash - &&\
-apt-get install -y nodejs
+apt install -y nodejs
 ```
 
 **Node.js v19.x**:
@@ -180,14 +179,14 @@ apt-get install -y nodejs
 
 ```sh
 curl -fsSL https://deb.nodesource.com/setup_19.x | sudo -E bash - &&\
-sudo apt-get install -y nodejs
+sudo apt install -y nodejs
 ```
 
 ##### Using Debian, as root
 
 ```sh
 curl -fsSL https://deb.nodesource.com/setup_19.x | bash - &&\
-apt-get install -y nodejs
+apt install -y nodejs
 ```
 
 **Node.js v18.x**:
@@ -196,14 +195,14 @@ apt-get install -y nodejs
 
 ```sh
 curl -fsSL https://deb.nodesource.com/setup_18.x | sudo -E bash - &&\
-sudo apt-get install -y nodejs
+sudo apt install -y nodejs
 ```
 
 ##### Using Debian, as root
 
 ```sh
 curl -fsSL https://deb.nodesource.com/setup_18.x | bash - &&\
-apt-get install -y nodejs
+apt install -y nodejs
 ```
 
 **Node.js v16.x**:
@@ -212,14 +211,14 @@ apt-get install -y nodejs
 
 ```sh
 curl -fsSL https://deb.nodesource.com/setup_16.x | sudo -E bash - &&\
-sudo apt-get install -y nodejs
+sudo apt install -y nodejs
 ```
 
 ##### Using Debian, as root
 
 ```sh
 curl -fsSL https://deb.nodesource.com/setup_16.x | bash - &&\
-apt-get install -y nodejs
+apt install -y nodejs
 ```
 
 **Node.js LTS (v18.x)**:
@@ -228,14 +227,14 @@ apt-get install -y nodejs
 
 ```sh
 curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash - &&\
-sudo apt-get install -y nodejs
+sudo apt install -y nodejs
 ```
 
 ##### Using Debian, as root
 
 ```sh
 curl -fsSL https://deb.nodesource.com/setup_lts.x | bash - &&\
-apt-get install -y nodejs
+apt install -y nodejs
 ```
 
 **Node.js Current (v20.x)**:
@@ -244,14 +243,14 @@ apt-get install -y nodejs
 
 ```sh
 curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash - &&\
-sudo apt-get install -y nodejs
+sudo apt install -y nodejs
 ```
 
 ##### Using Debian, as root
 
 ```sh
 curl -fsSL https://deb.nodesource.com/setup_current.x | bash - &&\
-apt-get install -y nodejs
+apt install -y nodejs
 ```
 
 ***Optional***: install build tools
@@ -261,7 +260,7 @@ To compile and install native addons from npm you may also need to install build
 ##### use `sudo` on Ubuntu or run this as root on debian
 
 ```sh
-apt-get install -y build-essential
+apt install -y build-essential
 ```
 
 `<a name="debuninstall"></a>`
@@ -273,7 +272,7 @@ To completely remove Node.js installed from the deb.nodesource.com package metho
 ##### use `sudo` on Ubuntu or run this as root on debian
 
 ```sh
-apt-get purge nodejs &&\
+apt purge nodejs &&\
 rm -r /etc/apt/sources.list.d/nodesource.list
 ```
 
@@ -291,7 +290,7 @@ This step is only required if you previously used Chris Lea's Node.js PPA.
 
 ```sh
 # add-apt-repository may not be present on some Ubuntu releases:
-# sudo apt-get install python-software-properties
+# sudo apt install python-software-properties
 sudo add-apt-repository -y -r ppa:chris-lea/node.js &&\
 sudo rm -f /etc/apt/sources.list.d/chris-lea-node_js-*.list &&\
 sudo rm -f /etc/apt/sources.list.d/chris-lea-node_js-*.list.save
@@ -330,8 +329,8 @@ echo "deb-src [signed-by=$KEYRING] https://deb.nodesource.com/$VERSION $DISTRO m
 **4. Update package lists and install Node.js**
 
 ```sh
-sudo apt-get update
-sudo apt-get install nodejs
+sudo apt update
+sudo apt install nodejs
 ```
 
 `<a name="rpm"></a>`
@@ -392,7 +391,7 @@ NodeSource will continue to maintain the following architectures and may add add
 
 _NOTE: If you are using RHEL 6 or CentOS 6, you might want to read about [running Node.js on older distros](https://github.com/nodesource/distributions/blob/master/OLDER_DISTROS.md)._
 
-The Nodesource RPM package signing key is available here: https://rpm.nodesource.com/pub/el/NODESOURCE-GPG-SIGNING-KEY-EL
+The Nodesource RPM package signing key is available here: <https://rpm.nodesource.com/pub/el/NODESOURCE-GPG-SIGNING-KEY-EL>
 
 Run on RHEL, CentOS, CloudLinux, Amazon Linux or Fedora:
 
@@ -511,6 +510,7 @@ To test an installation is working (and that the setup scripts are working!) use
 
 ```sh
 curl -fsSL https://deb.nodesource.com/test | bash -
+
 ```
 
 `<a name="questions"></a>`
@@ -541,7 +541,7 @@ A: Due to the limitations of the compiler toolchain on EL 5 and its end of gener
 
 ---
 
-Q: I'm seeing "Your distribution, identified as "*.i686" or "*.i386, is not currently supported, why?
+Q: I'm seeing "Your distribution, identified as "_.i686" or "_.i386, is not currently supported, why?
 
 A: Node.js 4.x and newer require a 64bit os for rpms. See [issue #268](https://github.com/nodesource/distributions/issues/268)
 

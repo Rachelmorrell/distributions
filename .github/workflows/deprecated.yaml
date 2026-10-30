@@ -1,0 +1,86 @@
+name: "Test Installation Scripts DEPRECATED VERSIONS"
+
+on:
+  schedule:
+    - cron: "00 00 * * *" # Run every day at midnight
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  deb:
+    name: "NodeJS ${{ matrix.version }}(${{ matrix.os }})"
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: [ 16, 18 ]
+        os: [ "ubuntu:20.04", "debian:10" ]
+    container:
+      image: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Fix sources.list for Debian 10
+        if: contains(matrix.os, 'debian:10')
+        run: |
+          echo "deb http://archive.debian.org/debian buster main" > /etc/apt/sources.list
+          apt-get -o Acquire::Check-Valid-Until=false -o Acquire::AllowInsecureRepositories=true update
+
+      - name: Run Installation Script
+        run: ./scripts/deb/setup_${{ matrix.version }}.x
+
+      - name: Install Nodejs
+        run: |
+          apt install nodejs -y
+
+      - name: Validate Node Version
+        run: |
+          node -e "console.log(process.version)"
+          NODE_VERSION=$(node -e "console.log(process.version.split('.')[0])")
+          if [[ ${NODE_VERSION} != "v${{ matrix.version }}" ]]; then
+            echo "Node version is not ${{ matrix.version }}. It is $NODE_VERSION"
+            exit 1
+          fi
+  rpm:
+    name: "NodeJS ${{ matrix.version }}(${{ matrix.os }})"
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: [ 16, 18 ]
+        os: [ "fedora:29", "amazonlinux:2023" ]
+    container:
+      image: ${{ matrix.os }}
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: install git
+        run: |
+          yum update -y
+          yum install git -y
+
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Run Istallation Script
+        run: ./scripts/rpm/setup_${{ matrix.version }}.x
+
+      - name: Install Nodejs
+        run: |
+          yum install nodejs -y
+
+      - name: Validate Node Version
+        run: |
+          node -e "console.log(process.version)"
+          NODE_VERSION=$(node -e "console.log((process.version).split('.')[0])")
+          if [[ ${NODE_VERSION} != "v${{ matrix.version }}" ]]; then
+            echo "Node version is not ${{ matrix.version }}. It is $NODE_VERSION"
+            exit 1
+          fi
